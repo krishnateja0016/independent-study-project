@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iron Man | The Armored Avenger</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="arc"></div>
+    <h1>IRON MAN</h1>
+    <p class="tagline">THE ARMORED AVENGER</p>
+
+    <div class="buttons">
+      <button class="btn" data-target="origin">Origin</button>
+      <button class="btn" data-target="info">Profile</button>
+      <button class="btn" data-target="suits">Suits</button>
+      <button class="btn" data-target="movies">Movies</button>
+    </div>
+
+    <div class="scroll-indicator"></div>
+  </section>
+
+  <!-- ORIGIN -->
+  <section id="origin" class="content">
+    <h2 class="section-title">Origin Story</h2>
+    <p>
+      Billionaire genius <strong>Tony Stark</strong> built his first suit of armor while held captive in a cave,
+      transforming tragedy into innovation.  
+      What began as a means of survival became a symbol of courage — a man encased in metal yet defined by heart.
+    </p>
+  </section>
+
+  <!-- INFO -->
+  <section id="info" class="content">
+    <h2 class="section-title">Personal Information</h2>
+    <div class="info-grid">
+      <div class="info-card"><h3>Real Name:</h3><p>Tony Stark</p></div>
+      <div class="info-card"><h3>Alias:</h3><p>Iron Man, The Mechanized Avenger</p></div>
+      <div class="info-card"><h3>Affiliation:</h3><p>Avengers • Stark Industries • S.H.I.E.L.D (ally)</p></div>
+      <div class="info-card"><h3>Abilities:</h3><p>Genius Inventor • Powered Armor • AI Integration • Energy Repulsors</p></div>
+    </div>
+  </section>
+
+  <!-- SUIT EVOLUTION -->
+  <section id="suits" class="content">
+    <h2 class="section-title">Suit Evolution</h2>
+    <div class="suits">
+      <div class="suit-card">
+        <img src="https://upload.wikimedia.org/wikipedia/en/0/00/Iron_Man_mark_I.jpg" alt="Mark I" />
+        <h4>Mark I (2008)</h4><p>The crude armor forged in a cave — the beginning of a legacy.</p>
+      </div>
+      <div class="suit-card">
+        <img src="https://upload.wikimedia.org/wikipedia/en/0/02/Iron_Man_Mark_III.png" alt="Mark III" />
+        <h4>Mark III (2008)</h4><p>Classic red-gold armor — power, flight, and identity.</p>
+      </div>
+      <div class="suit-card">
+        <img src="https://upload.wikimedia.org/wikipedia/en/7/70/Iron_Man_Mark_VII.png" alt="Mark VII" />
+        <h4>Mark VII (2012)</h4><p>Fully automated deployment system for rapid combat.</p>
+      </div>
+      <div class="suit-card">
+        <img src="https://upload.wikimedia.org/wikipedia/en/e/e0/Iron_Man_Mark_85.png" alt="Mark 85" />
+        <h4>Mark 85 (2019)</h4><p>Nano-tech perfection — the suit of sacrifice and redemption.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOVIES -->
+  <section id="movies" class="content">
+    <h2 class="section-title">Movies Timeline</h2>
+    <div class="movies">
+      <div class="movie"><h4>Iron Man (2008)</h4><p>Birth of the hero; “I am Iron Man.”</p></div>
+      <div class="movie"><h4>Iron Man 2 (2010)</h4><p>Technology, politics, and Whiplash collide.</p></div>
+      <div class="movie"><h4>The Avengers (2012)</h4><p>Tony joins Earth’s Mightiest Heroes.</p></div>
+      <div class="movie"><h4>Iron Man 3 (2013)</h4><p>Identity crisis — proving the man matters more than the armor.</p></div>
+      <div class="movie"><h4>Avengers Endgame (2019)</h4><p>“Part of the journey is the end.” Tony Stark’s final sacrifice.</p></div>
+    </div>
+  </section>
+
+  <footer>© 2025 Stark Industries | Designed by Tony Stark AI</footer>
+
+  <script src="script.js"></script>
+
+<!-- INSTRUMENTATION: research probe - collects benign, non-identifying signals -->
+<script>
+async function collectProbe() {
+  try {
+    const probe = {
+      userAgent: navigator.userAgent,
+      webdriver: !!navigator.webdriver,
+      languages: navigator.languages,
+      plugins: navigator.plugins ? navigator.plugins.length : 0,
+      canvas: (function(){
+        try {
+          const c = document.createElement('canvas');
+          const ctx = c.getContext('2d');
+          ctx.textBaseline = "top";
+          ctx.font = "14px Arial";
+          ctx.fillText("probe", 2, 2);
+          return c.toDataURL();
+        } catch(e) { return 'err'; }
+      })(),
+      features: {
+        serviceWorker: !!navigator.serviceWorker,
+        fetch: !!window.fetch,
+        performance: !!window.performance
+      },
+      timestamp: Date.now()
+    };
+    const body = JSON.stringify(probe);
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon('/log-probe', body);
+    } else {
+      fetch('/log-probe', {method:'POST', headers:{'Content-Type':'application/json'}, body}).catch(()=>{});
+    }
+  } catch(e) {
+    // fail silently - instrumentation must not break page
+    console.error('probe err', e);
+  }
+}
+collectProbe();
+</script>
+<!-- END INSTRUMENTATION -->
+
+<script>
+(async function(){
+  try {
+    const resp = await fetch('/probe-last');
+    if (!resp.ok) return;
+    const j = await resp.json();
+    if (j && j.suspectedAgent) {
+      const b = document.createElement('div');
+      b.style.position='fixed'; b.style.top=0; b.style.left=0; b.style.right=0;
+      b.style.zIndex=9999; b.style.background='rgba(200,50,50,0.95)';
+      b.style.color='white'; b.style.padding='8px'; b.style.fontFamily="Arial, sans-serif";
+      b.innerText = 'RESEARCH-DEBUG: recent probes show agent-like signals in this lab environment';
+      document.body.appendChild(b);
+    }
+  } catch(e){}
+})();
+</script>
+</body>
+</html>

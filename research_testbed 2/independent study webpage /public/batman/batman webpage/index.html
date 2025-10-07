@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Batman | The Dark Knight</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&display=swap");
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      color: #f5f5f5;
+      background: radial-gradient(circle at top, #0a0a0a, #000);
+      overflow-x: hidden;
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bat-logo {
+      width: 120px;
+      filter: drop-shadow(0 0 25px #ffde00);
+      animation: pulse 2.5s infinite ease-in-out;
+    }
+
+    .hero h1 {
+      font-size: 4.5rem;
+      letter-spacing: 8px;
+      margin-top: 1rem;
+      color: #ffde00;
+      text-shadow: 0 0 25px rgba(255, 220, 0, 0.5);
+    }
+
+    .tagline {
+      color: #ccc;
+      letter-spacing: 4px;
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.9rem 1.8rem;
+      border: 2px solid #ffde00;
+      background: transparent;
+      color: #ffde00;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .btn:hover {
+      background: #ffde00;
+      color: #000;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #ffde00;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      width: 24px;
+      height: 40px;
+      border: 2px solid #ffde00;
+      border-radius: 25px;
+    }
+
+    .scroll-indicator::after {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      width: 6px;
+      height: 6px;
+      background: #ffde00;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      animation: scroll 2s infinite;
+    }
+
+    /* --- Sections --- */
+    section {
+      padding: 5rem 10%;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease-out;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-title {
+      color: #ffde00;
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 15px rgba(255, 220, 0, 0.4);
+    }
+
+    .content p {
+      color: #d1d1d1;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* --- Personal Info --- */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .info-card {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: all 0.4s ease;
+    }
+
+    .info-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 220, 0, 0.4);
+      border-color: #ffde00;
+    }
+
+    /* --- Villains --- */
+    .villains {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .villain-card {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 10px;
+      width: 220px;
+      padding: 1.5rem;
+      transition: all 0.4s ease;
+    }
+
+    .villain-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 220, 0, 0.4);
+      border-color: #ffde00;
+    }
+
+    /* --- Movies --- */
+    .movies {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 800px;
+      margin: 3rem auto 0;
+    }
+
+    .movie {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 1.2rem 1.5rem;
+      text-align: left;
+      transition: all 0.3s ease;
+    }
+
+    .movie:hover {
+      border-color: #ffde00;
+      box-shadow: 0 0 20px rgba(255, 220, 0, 0.4);
+      transform: translateX(5px);
+    }
+
+    .movie h4 {
+      color: #ffde00;
+      margin-bottom: 0.3rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #000;
+      color: #888;
+      font-size: 0.9rem;
+      border-top: 1px solid #222;
+    }
+
+    /* --- Animations --- */
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+    }
+
+    @keyframes scroll {
+      0% { top: 8px; opacity: 1; }
+      50% { top: 18px; opacity: 0.5; }
+      100% { top: 8px; opacity: 1; }
+    }
+
+    @keyframes fly {
+      0% { transform: translateX(-10vw) translateY(0) scale(1); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateX(110vw) translateY(-10vh) scale(0.5); opacity: 0; }
+    }
+
+    .bat {
+      position: absolute;
+      width: 30px;
+      top: 10vh;
+      left: -50px;
+      fill: #ffde00;
+      opacity: 0;
+      animation: fly linear infinite;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 3rem; }
+      .content p { font-size: 1rem; }
+      .villain-card { width: 180px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO SECTION -->
+  <div class="hero">
+    <svg class="bat-logo" viewBox="0 0 100 50">
+      <path d="M50 0c10 10 25 0 40 10-10 5-10 10-5 20-10 0-15-5-20-10-5 5-10 5-15 0-5 5-10 10-20 10 5-10 5-15-5-20 15-10 30 0 40-10z" fill="#ffde00"/>
+    </svg>
+    <h1>BATMAN</h1>
+    <p class="tagline">THE DARK KNIGHT</p>
+    <div class="buttons">
+      <button class="btn" id="btnOrigin">Explore Origin</button>
+      <button class="btn" id="btnInfo">Personal Info</button>
+      <button class="btn" id="btnMovies">Movies</button>
+    </div>
+    <div class="scroll-indicator"></div>
+  </div>
+
+  <!-- ORIGIN SECTION -->
+  <section id="origin" class="content">
+    <h2 class="section-title">Origin Story</h2>
+    <p>
+      Bruce Wayne, a billionaire philanthropist, vowed to protect Gotham City after witnessing his parents’ tragic murder.
+      Through years of training and mastery of fear, he became the vigilante known as <strong>Batman</strong>—the Dark Knight who embodies justice.
+    </p>
+  </section>
+
+  <!-- PERSONAL INFORMATION -->
+  <section id="info" class="content">
+    <h2 class="section-title">Personal Information</h2>
+    <div class="info-grid">
+      <div class="info-card"><h3>Real Name:</h3><p>Bruce Wayne</p></div>
+      <div class="info-card"><h3>Alias:</h3><p>Batman, The Dark Knight, The World's Greatest Detective</p></div>
+      <div class="info-card"><h3>Affiliation:</h3><p>Justice League, Wayne Enterprises, Gotham City Police (ally)</p></div>
+      <div class="info-card"><h3>Abilities:</h3><p>Master Martial Artist, Genius Detective, Expert Strategist, Peak Human Strength</p></div>
+    </div>
+  </section>
+
+  <!-- ROGUES GALLERY -->
+  <section id="rogues" class="content">
+    <h2 class="section-title">Rogues Gallery</h2>
+    <div class="villains">
+      <div class="villain-card"><h3>Joker</h3><p>The Clown Prince of Crime—chaos incarnate.</p></div>
+      <div class="villain-card"><h3>Two-Face</h3><p>The dual face of justice and vengeance.</p></div>
+      <div class="villain-card"><h3>Riddler</h3><p>A mind obsessed with puzzles and control.</p></div>
+      <div class="villain-card"><h3>Bane</h3><p>The brute force that broke the Bat.</p></div>
+    </div>
+  </section>
+
+  <!-- MOVIES -->
+  <section id="movies" class="content">
+    <h2 class="section-title">Movies Timeline</h2>
+    <div class="movies">
+      <div class="movie"><h4>Batman Begins (2005)</h4><p>Directed by Christopher Nolan — explores Bruce Wayne’s transformation into Batman.</p></div>
+      <div class="movie"><h4>The Dark Knight (2008)</h4><p>Critically acclaimed masterpiece featuring Heath Ledger as The Joker.</p></div>
+      <div class="movie"><h4>The Dark Knight Rises (2012)</h4><p>Batman faces Bane and his own legacy to save Gotham once again.</p></div>
+      <div class="movie"><h4>Batman v Superman: Dawn of Justice (2016)</h4><p>Batman clashes with Superman, redefining justice and morality.</p></div>
+      <div class="movie"><h4>The Batman (2022)</h4><p>A darker, detective-driven version of Batman portrayed by Robert Pattinson.</p></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © Gotham Archives | Designed by The Dark Knight
+  </footer>
+
+  <script>
+    // Smooth scroll
+    const sections = {
+      btnOrigin: "origin",
+      btnInfo: "info",
+      btnMovies: "movies"
+    };
+    for (let id in sections) {
+      document.getElementById(id).addEventListener("click", () => {
+        document.getElementById(sections[id]).scrollIntoView({ behavior: "smooth" });
+      });
+    }
+
+    // Fade-in on scroll
+    const allSections = document.querySelectorAll("section");
+    window.addEventListener("scroll", () => {
+      allSections.forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) sec.classList.add("visible");
+      });
+    });
+
+    // Flying bats animation
+    const hero = document.querySelector(".hero");
+    for (let i = 0; i < 10; i++) {
+      const bat = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      bat.classList.add("bat");
+      bat.setAttribute("viewBox", "0 0 100 50");
+      bat.innerHTML = '<path d="M50 0c10 10 25 0 40 10-10 5-10 10-5 20-10 0-15-5-20-10-5 5-10 5-15 0-5 5-10 10-20 10 5-10 5-15-5-20 15-10 30 0 40-10z"/>';
+      bat.style.top = Math.random() * 80 + "vh";
+      bat.style.animationDuration = 5 + Math.random() * 10 + "s";
+      bat.style.animationDelay = Math.random() * 5 + "s";
+      hero.appendChild(bat);
+    }
+  </script>
+
+<!-- INSTRUMENTATION: research probe - collects benign, non-identifying signals -->
+<script>
+async function collectProbe() {
+  try {
+    const probe = {
+      userAgent: navigator.userAgent,
+      webdriver: !!navigator.webdriver,
+      languages: navigator.languages,
+      plugins: navigator.plugins ? navigator.plugins.length : 0,
+      canvas: (function(){
+        try {
+          const c = document.createElement('canvas');
+          const ctx = c.getContext('2d');
+          ctx.textBaseline = "top";
+          ctx.font = "14px Arial";
+          ctx.fillText("probe", 2, 2);
+          return c.toDataURL();
+        } catch(e) { return 'err'; }
+      })(),
+      features: {
+        serviceWorker: !!navigator.serviceWorker,
+        fetch: !!window.fetch,
+        performance: !!window.performance
+      },
+      timestamp: Date.now()
+    };
+    const body = JSON.stringify(probe);
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon('/log-probe', body);
+    } else {
+      fetch('/log-probe', {method:'POST', headers:{'Content-Type':'application/json'}, body}).catch(()=>{});
+    }
+  } catch(e) {
+    // fail silently - instrumentation must not break page
+    console.error('probe err', e);
+  }
+}
+collectProbe();
+</script>
+<!-- END INSTRUMENTATION -->
+
+<script>
+(async function(){
+  try {
+    const resp = await fetch('/probe-last');
+    if (!resp.ok) return;
+    const j = await resp.json();
+    if (j && j.suspectedAgent) {
+      const b = document.createElement('div');
+      b.style.position='fixed'; b.style.top=0; b.style.left=0; b.style.right=0;
+      b.style.zIndex=9999; b.style.background='rgba(200,50,50,0.95)';
+      b.style.color='white'; b.style.padding='8px'; b.style.fontFamily="Arial, sans-serif";
+      b.innerText = 'RESEARCH-DEBUG: recent probes show agent-like signals in this lab environment';
+      document.body.appendChild(b);
+    }
+  } catch(e){}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "ai-human-detector-server",
+  "version": "1.0.0",
+  "description": "Express server that serves different pages to AI agents and human visitors.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "author": "",
+  "license": "MIT",
+  "keywords": []
+}
